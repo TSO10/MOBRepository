@@ -27,8 +27,6 @@ public class InfoActivity extends Activity {
         String firstname = extras.getString("firstnameLabel");
         firstnameLabel.setText(firstname);
 
-        Toast t = Toast.makeText(getApplicationContext(), firstname, Toast.LENGTH_SHORT);
-        t.show();
 
         String lastname = extras.getString("lastnameLabel");
         lastnameLabel.setText(lastname);
