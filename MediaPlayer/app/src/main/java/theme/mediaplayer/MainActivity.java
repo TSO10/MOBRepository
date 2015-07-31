@@ -23,11 +23,14 @@ public class MainActivity extends Activity {
     ImageButton pauseBtn;
     ImageButton stopBtn;
     private  boolean isPaused = false;
+    private boolean isStopped = false;
     SeekBar sb;
     MediaPlayer mediaPlayer;
     String songPath;
     int length;
-    int currentPosition;
+    int currentPlayerPosition;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,16 +53,20 @@ public class MainActivity extends Activity {
         forwardSong();
 
         sb.setMax(length);
+
+
         sb.postDelayed(new Runnable() {
             @Override
             public void run() {
-                currentPosition = mediaPlayer.getCurrentPosition();
-                sb.postDelayed(this, 100);
-                sb.setProgress(currentPosition);
+
+                    currentPlayerPosition = mediaPlayer.getCurrentPosition();
+                    sb.postDelayed(this, 100);
+                    sb.setProgress(currentPlayerPosition);
+                    Log.d("tagename", "string i want");
+       /*             Toast t = Toast.makeText(getApplicationContext(), "yes", Toast.LENGTH_SHORT);
+                    t.show();*/
             }
         }, 100);
-
-            seekbarStatus();
 
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -67,69 +74,60 @@ public class MainActivity extends Activity {
                 mediaPlayer.seekTo(0);
             }
         });
-    }
 
-    public void seekbarStatus ()
-    {
-        sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser)
-                {
-                    sb.setProgress(progress);
-                    mediaPlayer.seekTo(progress);
-                    currentPosition = progress;
-                }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
-        });
     }
 
 
+    // method for playing song taking care of all scenarios
     public void PlaySong ()
     {
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(!mediaPlayer.isPlaying())
-                {
-                    mediaPlayer.seekTo(currentPosition);
-                    mediaPlayer.start();
-                }
-                if(isPaused)
-                {
-                    mediaPlayer.start();
-                    isPaused = false;
-                }
-            else
-                {
-                    mediaPlayer.reset();
-                    try {
 
-                        mediaPlayer.setDataSource(songPath);
-                        mediaPlayer.prepare();
-                    } catch (IOException e) {
-                        e.printStackTrace();
+
+                if(!mediaPlayer.isPlaying())
+                    {
+                        mediaPlayer.seekTo(currentPlayerPosition);
+                        mediaPlayer.start();
                     }
-                    mediaPlayer.seekTo(currentPosition);
-                    mediaPlayer.start();
-                }
+
+
+                if(isPaused)
+                    {
+                        mediaPlayer.start();
+                        isPaused = false;
+
+                    }
+
+                if(mediaPlayer.isPlaying())
+                     {
+                         mediaPlayer.start();
+                    }
+
+                if(isStopped)
+
+                    {
+                        mediaPlayer.reset();
+                        try {
+
+                            mediaPlayer.setDataSource(songPath);
+                            mediaPlayer.prepare();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        mediaPlayer.seekTo(currentPlayerPosition);
+                        mediaPlayer.start();
+                        isStopped = false;
+                        isPaused = false;
+                    }
 
             }
         });
     }
 
-
+    // method for pause the song
     public void PauseSong ()
     {
         pauseBtn.setOnClickListener(new View.OnClickListener() {
@@ -137,10 +135,12 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 mediaPlayer.pause();
                 isPaused = true;
+                isStopped = false;
             }
         });
     }
 
+    // method for stop the song
     public void StopSong ()
     {
         stopBtn.setOnClickListener(new View.OnClickListener() {
@@ -148,12 +148,14 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 mediaPlayer.seekTo(0);
                 mediaPlayer.stop();
+
                 isPaused = false;
+                isStopped = true;
             }
         });
     }
 
-
+    // method for forward or reward to the song on user touch on seekbar
     public void forwardSong()
     {
         sb.setOnTouchListener(new View.OnTouchListener() {

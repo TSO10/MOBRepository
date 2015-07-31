@@ -8,12 +8,11 @@
      android:orientation="horizontal">
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="66dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/playButton"
         android:src="@drawable/ic_ab_play"
-        android:background="@color/material_blue_grey_800"
-        android:layout_weight="0.14" />
+        android:background="@color/material_blue_grey_800" />
 
     <SeekBar
         android:layout_width="wrap_content"
@@ -22,20 +21,18 @@
         android:layout_weight="1" />
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/pauseButton"
         android:src="@drawable/pauseicon"
-        android:background="@color/material_blue_grey_800" android:layout_marginRight="10dp"
-        android:layout_weight="0.12" />
+        android:background="@color/material_blue_grey_800" android:layout_marginRight="10dp" />
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="58dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/stopButton"
         android:src="@drawable/stopicon"
-        android:background="@color/material_blue_grey_800"
-        android:layout_weight="0.14" />
+        android:background="@color/material_blue_grey_800" />
     />
 
 </LinearLayout>
