@@ -9,10 +9,11 @@
 
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="66dp"
         android:id="@+id/playButton"
         android:src="@drawable/ic_ab_play"
-        android:background="@color/material_blue_grey_800"/>
+        android:background="@color/material_blue_grey_800"
+        android:layout_weight="0.14" />
 
     <SeekBar
         android:layout_width="wrap_content"
@@ -22,17 +23,19 @@
 
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="58dp"
         android:id="@+id/pauseButton"
         android:src="@drawable/pauseicon"
-        android:background="@color/material_blue_grey_800" android:layout_marginRight="10dp"/>
+        android:background="@color/material_blue_grey_800" android:layout_marginRight="10dp"
+        android:layout_weight="0.12" />
 
     <ImageButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="58dp"
         android:id="@+id/stopButton"
         android:src="@drawable/stopicon"
-        android:background="@color/material_blue_grey_800"/>
+        android:background="@color/material_blue_grey_800"
+        android:layout_weight="0.14" />
     />
 
 </LinearLayout>

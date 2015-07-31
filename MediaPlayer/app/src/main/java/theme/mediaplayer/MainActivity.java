@@ -57,14 +57,55 @@ public class MainActivity extends Activity {
                 sb.postDelayed(this, 100);
                 sb.setProgress(currentPosition);
             }
-        },100);
+        }, 100);
+
+            seekbarStatus();
+
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mediaPlayer.seekTo(0);
+            }
+        });
     }
+
+    public void seekbarStatus ()
+    {
+        sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser)
+                {
+                    sb.setProgress(progress);
+                    mediaPlayer.seekTo(progress);
+                    currentPosition = progress;
+                }
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+    }
+
 
     public void PlaySong ()
     {
         playBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                if(!mediaPlayer.isPlaying())
+                {
+                    mediaPlayer.seekTo(currentPosition);
+                    mediaPlayer.start();
+                }
                 if(isPaused)
                 {
                     mediaPlayer.start();
@@ -80,6 +121,7 @@ public class MainActivity extends Activity {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
+                    mediaPlayer.seekTo(currentPosition);
                     mediaPlayer.start();
                 }
 
@@ -107,7 +149,6 @@ public class MainActivity extends Activity {
                 mediaPlayer.seekTo(0);
                 mediaPlayer.stop();
                 isPaused = false;
-
             }
         });
     }
