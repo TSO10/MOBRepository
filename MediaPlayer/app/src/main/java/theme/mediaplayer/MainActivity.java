@@ -50,7 +50,7 @@ public class MainActivity extends Activity {
         PlaySong();
         PauseSong();
         StopSong();
-        forwardSong();
+        ForwardSong();
 
         sb.setMax(length);
 
@@ -156,7 +156,7 @@ public class MainActivity extends Activity {
     }
 
     // method for forward or reward to the song on user touch on seekbar
-    public void forwardSong()
+    public void ForwardSong()
     {
         sb.setOnTouchListener(new View.OnTouchListener() {
 
