@@ -20,9 +20,11 @@ import java.util.List;
 public class MainActivity extends ActionBarActivity {
 
     Button btn ;
-    Location lastLoc;
+    Location currentLoc;
     float dist;
     TextView tv;
+    LocationManager locationmanager;
+    List<Location> locationList = new ArrayList<>();
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,53 +32,61 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
         btn = (Button) findViewById(R.id.button);
         tv = (TextView) findViewById(R.id.distance);
-        final LocationManager lm = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        locationmanager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
 
         LocationListener locationListener = new LocationListener() {
             @Override
             public void onLocationChanged(Location location) {
 
-                if(lastLoc == null)
-                {
-                    lastLoc = location;
-                }
-                else {
-                    lastLoc = lm.getLastKnownLocation(lm.GPS_PROVIDER);
-                }
-
-                dist += lastLoc.distanceTo(location);
+                currentLoc = location;
 
             }
 
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
-                Toast t = Toast.makeText(getApplicationContext(), Integer.toString(status), Toast.LENGTH_SHORT);
-                t.show();
+         /*       Toast t = Toast.makeText(getApplicationContext(), Integer.toString(status), Toast.LENGTH_SHORT);
+                t.show();*/
             }
 
             @Override
             public void onProviderEnabled(String provider) {
-                Toast t = Toast.makeText(getApplicationContext(), provider, Toast.LENGTH_SHORT);
+                Toast t = Toast.makeText(getApplicationContext(), provider + "enabled", Toast.LENGTH_SHORT);
                 t.show();
             }
 
             @Override
             public void onProviderDisabled(String provider) {
-                Toast t = Toast.makeText(getApplicationContext(), provider, Toast.LENGTH_SHORT);
+                Toast t = Toast.makeText(getApplicationContext(), provider + "disabled", Toast.LENGTH_SHORT);
                 t.show();
             }
         };
 
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+        locationmanager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000, 1, locationListener);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                if(currentLoc != null){
 
-                tv.setText(String.valueOf(dist));
-                Toast t = Toast.makeText(getApplicationContext(),String.valueOf(dist),Toast.LENGTH_SHORT);
-                t.show();
+                    locationList.add(currentLoc);
+
+                    if (locationList.size() > 1)
+                    {
+                        dist += currentLoc.distanceTo(locationList.get(locationList.size()-2));
+
+                    }
+
+                    String distance = String.valueOf(dist);
+                    tv.setText(distance);
+                    Toast t = Toast.makeText(getApplicationContext(),distance,Toast.LENGTH_SHORT);
+                    t.show();
+                }
+                else {
+                    locationList.clear();
+                    Toast t = Toast.makeText(getApplicationContext(),"No gps coordinates",Toast.LENGTH_SHORT);
+                    t.show();
+                }
             }
         });
     }
