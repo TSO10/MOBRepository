@@ -34,6 +34,7 @@ public class TheService extends Service {
     SeekBar seekbar;
 
 
+
     public TheService() {
 
     }
@@ -51,8 +52,6 @@ public class TheService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         seekbar = MainActivity.getSeekbar();
-        //getLocalSongs();
-
 
         return Service.START_NOT_STICKY;
 
@@ -72,7 +71,7 @@ public class TheService extends Service {
         return mBinder;
     }
 
-    public void myNoti() {
+   /* public void myNoti() {
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(this)
                         .setSmallIcon(R.drawable.ic_noti)
@@ -84,7 +83,7 @@ public class TheService extends Service {
         // mId allows you to update the notification later on.
         mNotificationManager.notify(1, mBuilder.build());
 
-    }
+    }*/
 
     public void PlaySong() {
 
@@ -108,9 +107,8 @@ public class TheService extends Service {
             }
         };
 
+
         handler.postDelayed(r, 1000);
-
-
 
         if (!mPlayer.isPlaying()) {
 
@@ -120,9 +118,10 @@ public class TheService extends Service {
 
         }
 
-
         if (isPaused) {
+
             mPlayer.start();
+
             isPaused = false;
             songStatus = true;
 

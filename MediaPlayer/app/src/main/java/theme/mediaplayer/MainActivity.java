@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -47,12 +48,15 @@ public class MainActivity extends Activity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // getSdCardSongs();
+        SharedPreferences.Editor editor = getSharedPreferences("Activity", MODE_PRIVATE).edit();
+        editor.putBoolean("mainActivity", false);
+        editor.commit();
 
         playBtn = (ImageButton) findViewById(R.id.playButton);
         pauseBtn = (ImageButton) findViewById(R.id.pauseButton);
@@ -142,6 +146,7 @@ public class MainActivity extends Activity {
     }
 
     // method for stop the song
+
     public void StopButtonClick() {
         stopBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -209,6 +214,7 @@ public class MainActivity extends Activity {
         Intent i = new Intent(this, SongListActivity.class);
         startActivity(i);
         songStatus = true;
+        finish();
 
 
     }
@@ -217,6 +223,9 @@ public class MainActivity extends Activity {
     public void onBackPressed() {
         super.onBackPressed();
         songStatus = true;
+        Intent i = new Intent(this, SongListActivity.class);
+        startActivity(i);
+        finish();
 
     }
 }

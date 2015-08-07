@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.IBinder;
@@ -34,6 +35,7 @@ public class SongListActivity extends Activity {
     TheService mService;
     boolean sBound = false;
     ListView listView;
+    boolean status = false;
 
 
     @Override
@@ -45,16 +47,20 @@ public class SongListActivity extends Activity {
         startService(i);
 
         getSdCardSongs();
-        // Get ListView object from xml
+
         listView = (ListView) findViewById(R.id.list);
 
         final Intent intent = new Intent(this, MainActivity.class);
+        SharedPreferences prefs =  getSharedPreferences("Activity", MODE_PRIVATE);
 
-
+        status = prefs.getBoolean("mainActivity", false);
+        if (status ) {
+            startActivity(intent);
+           finish();
+        }
 
 
         final ArrayList<String> songNameList = new ArrayList<>();
-        //final ArrayList<String> songPathList = new ArrayList<>();
 
         for (final Song song : songArrayList) {
 
@@ -96,7 +102,9 @@ public class SongListActivity extends Activity {
                         "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
                         .show();
 
+
                 startActivity(intent);
+                 finish();
                 mService.PlaySong();
 
             }
@@ -189,5 +197,13 @@ public class SongListActivity extends Activity {
         if (sBound) {
             unbindService(serviceConnection);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SharedPreferences.Editor editor = getSharedPreferences("Activity", MODE_PRIVATE).edit();
+        editor.putBoolean("mainActivity",true);
+        editor.commit();
     }
 }
