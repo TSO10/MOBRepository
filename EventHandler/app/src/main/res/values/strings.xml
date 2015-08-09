@@ -12,4 +12,6 @@
     <string name="firstname">First Name:</string>
     <string name="lastname">Last Name:</string>
 	<string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_event_details">EventDetailsActivity</string>
+    <string name="title_activity_create_new_event">CreateNewEventActivity</string>
 </resources>

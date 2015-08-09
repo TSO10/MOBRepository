@@ -1,4 +1,7 @@
-package com.group4.eventhandler;
+package webservice;
+
+import com.group4.eventhandler.Event;
+import com.group4.eventhandler.User;
 
 import org.json.JSONArray;
 import org.json.JSONException;
