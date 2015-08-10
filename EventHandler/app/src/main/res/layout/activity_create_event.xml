@@ -1,65 +1,112 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Event"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".CreateUserActivity"
-    android:id="@+id/Event">
+    tools:context=".CreateUserActivity">
 
 
+    <LinearLayout
+        android:id="@+id/linFormWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="470dp"
 
-    <EditText
-        android:id="@+id/et_headline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:hint="Headline">
+        android:background="@color/light_brown"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-        <requestFocus />
-    </EditText>
+        <Button
+            android:id="@+id/btn_load_image"
+            style="@style/give_form_field_style"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/form_field"
+            android:padding="5dp"
+            android:text="Load image" />
 
-    <EditText
-        android:id="@+id/et_description"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="Description"
-        android:ems="10"
-        android:layout_below="@+id/et_headline"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <EditText
+            android:id="@+id/et_headline"
+            style="@style/give_form_field_style"
+            android:layout_marginBottom="10dp"
+            android:hint="headline"
+            android:padding="5dp" />
 
-    <EditText
-        android:id="@+id/et_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="time"
-        android:ems="10"
-        android:layout_below="@+id/et_description"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <EditText
+            android:id="@+id/et_description"
+            style="@style/give_form_field_style"
+            android:layout_height="50dp"
+            android:gravity="top"
+            android:hint="description"
+            android:inputType="textMultiLine"
+            android:padding="5dp" />
 
-    <EditText
-        android:id="@+id/et_imageUrl"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="imageUrl"
-        android:ems="10"
-        android:layout_below="@+id/et_time"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:text="WHEN is the time of the event?"
+            android:textColor="#ffffff"
+            android:textSize="14dp" />
 
-    <Button
-        android:id="@+id/btn_createEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Create"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_date"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/form_field"
+                android:text="Date"
+                android:textColor="#cf636363"
+                android:textSize="14dp" />
+
+            <Button
+                android:id="@+id/btn_time"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/form_field"
+                android:text="Time"
+                android:textColor="#cf636363"
+                android:textSize="14dp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/targetimage"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/linFormWrapper"
+            android:layout_marginTop="2dp"
+            android:layout_weight="0.71"
+
+            />
+
+        <Button
+            android:id="@+id/btn_createEvent"
+            style="@style/give_form_field_style"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/form_field"
+            android:padding="5dp"
+            android:text="Create" />
+    </LinearLayout>
 
 </RelativeLayout>

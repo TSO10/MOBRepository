@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="light_brown">#b4936a</color>
+    <color name="brown">#b29169</color>
+    <color name="chart_green">#74ab6b</color>
+    <color name="battery_bar">#5e3f3f</color>
+    <color name="action_bar">#af906d</color>
+    <color name="tabs">#af906d</color>
+    <color name="primary_text">#ffffff</color>
+        <color name="secondary_text">#d4d4d4</color>
+    <color name="link_color">#2f63f8</color>
+    <color name="transparent_item_bg">#e9ffffff</color>
+    <color name="white">#FFFFFF</color>
+</resources>

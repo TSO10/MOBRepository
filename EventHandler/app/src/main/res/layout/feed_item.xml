@@ -3,4 +3,59 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
+    <ImageView
+        android:id="@+id/iv_photo_feed"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:background="#777777"
+        />
+
+    <RelativeLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:background="#ffffff">
+
+
+        <TextView
+            android:id="@+id/tv_headline_feed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp"
+            android:paddingLeft="16dp"
+            android:textSize="20sp"
+            android:textColor="#484a4f"
+            android:text="headline"/>
+
+        <TextView
+            android:id="@+id/tv_desc_feed"
+            android:layout_below="@id/tv_headline_feed"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="description"
+            android:textSize="12sp"
+            android:paddingBottom="8dp"
+            android:paddingLeft="16dp"
+            android:textColor="#b4936a" />
+
+
+
+        <TextView
+            android:id="@+id/tv_time_feed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15/08/2015 10 AM"
+            android:layout_below="@id/tv_desc_feed"
+
+            android:paddingLeft="16dp"
+            android:textColor="#b4936a"/>
+
+
+    </RelativeLayout>
+
 </LinearLayout>

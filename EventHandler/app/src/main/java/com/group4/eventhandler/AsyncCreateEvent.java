@@ -1,7 +1,6 @@
 package com.group4.eventhandler;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;

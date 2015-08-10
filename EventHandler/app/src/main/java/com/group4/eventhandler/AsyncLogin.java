@@ -5,8 +5,6 @@ import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.group4.eventhandler.iAsyncTaskCompleteListener;
-
 import org.json.JSONObject;
 
 import webservice.JSONParser;

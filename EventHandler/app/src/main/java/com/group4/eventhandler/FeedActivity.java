@@ -1,95 +1,120 @@
 package com.group4.eventhandler;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
+import android.content.res.Resources;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.AttributeSet;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.view.Window;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import org.json.JSONObject;
+import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
-
-import webservice.JSONParser;
-import webservice.RestAPI;
 
 
 public class FeedActivity extends Activity {
 
-    ArrayAdapter<String> adapter;
     ListView listv;
     Context context;
-    ArrayList<Event> data;
+    ArrayList<Event> eventArrayList;
     static int itemid;
-    ArrayList<String> test;
-    Button btnCreateEvent;
+    Intent intent;
+    private SwipeRefreshLayout swipeContainer;
+    FloatingActionButton fab;
+    FeedAdapter adapter;
+    public Activity CustomListView = null;
+    public ArrayList<Event> CustomListViewValuesArr = new ArrayList<Event>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+        CustomListView = this;
+        intent = new Intent(this, CreateEventActivity.class);
+        ActionBar actionBar = getActionBar();
+        actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
+        getActionBar().setCustomView(R.layout.ab_layout);
+        fab = (FloatingActionButton) findViewById(R.id.btn_fab);
 
-        btnCreateEvent = (Button) findViewById(R.id.btn_new_event);
-        data = new ArrayList<Event>();
-        test = new ArrayList<String>();
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(intent);
+            }
+        });
+
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
+        swipeContainer.setColorSchemeResources(android.R.color.holo_green_dark,
+                android.R.color.holo_blue_light,
+                android.R.color.holo_purple);
+
+
+        eventArrayList = new ArrayList<Event>();
         listv = (ListView) findViewById(R.id.lv_event);
         context = this;
 
-        adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, test);
+        Resources res = getResources();
+
+
+        /**************** Create Custom Adapter *********/
+        adapter = new FeedAdapter(CustomListView, CustomListViewValuesArr, res);
         listv.setAdapter(adapter);
+        itemid = FeedAdapter.itemId;
+
 
         Toast.makeText(this, "Loading Please Wait..", Toast.LENGTH_SHORT).show();
 
         new AsyncLoadAllEvents(getApplicationContext(), new FetchAllEventsTaskCompleteListener()).execute();
 
-        listv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                int itemPosition = position;
-                Object itemValue = listv.getItemAtPosition(position);
-                String test = itemValue.toString();
-                String kir = test.substring(0, 1);
-                itemid = Integer.parseInt(kir);
-                // Show Alert
-                Toast.makeText(getApplicationContext(),
-                        "Position :" + itemPosition + "  ListItem : " + itemValue, Toast.LENGTH_LONG)
-                        .show();
+            public void onRefresh() {
 
-                Intent i = new Intent(getApplicationContext(), EventDetailsActivity.class);
-                startActivity(i);
-
+                new AsyncLoadAllEvents(getApplicationContext(), new FetchAllEventsTaskCompleteListener()).execute();
             }
         });
 
-        btnCreateEvent.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), CreateEventActivity.class);
-                startActivity(i);
-            }
-        });
     }
-    public class FetchAllEventsTaskCompleteListener implements iAsyncTaskCompleteListener<ArrayList<Event>>{
+
+    /**
+     * **************  This function used by adapter ***************
+     */
+
+    public void onItemClick(int mPosition) {
+        Event event = (Event) CustomListViewValuesArr.get(mPosition);
+
+        Intent intent = new Intent(getApplicationContext(), EventDetailsActivity.class);
+        itemid = event.getId();
+        startActivity(intent);
+
+    }
+
+
+    public class FetchAllEventsTaskCompleteListener implements iAsyncTaskCompleteListener<ArrayList<Event>> {
         @Override
         public void onTaskComplete(ArrayList<Event> result) {
-            for (Event event : result)
-            {
-                data.add(event);
-                test.add(event.getId() + " "+ event.getHeadline() + " " + event.description);
+
+            CustomListViewValuesArr.clear();
+            eventArrayList.clear();
+
+            for (Event event : result) {
+                eventArrayList.add(event);
+
+                CustomListViewValuesArr.add(event);
             }
 
             adapter.notifyDataSetChanged();
+            swipeContainer.setRefreshing(false);
+
         }
     }
 }

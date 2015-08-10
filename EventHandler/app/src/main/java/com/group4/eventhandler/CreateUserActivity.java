@@ -15,6 +15,7 @@ public class CreateUserActivity extends Activity {
     EditText etfirstName, etLastName, etUsername, etPassword;
     Button btnCreateUser;
     Context context;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,8 @@ public class CreateUserActivity extends Activity {
         etUsername = (EditText) findViewById(R.id.et_cu_username);
         etPassword = (EditText) findViewById(R.id.et_cu_password);
         btnCreateUser = (Button) findViewById(R.id.createSignUpBtn);
+
+        intent = new Intent(context, LoginActivity.class);
 
         SignUpClick();
     }
@@ -71,10 +74,17 @@ public class CreateUserActivity extends Activity {
 
         @Override
         public void onTaskComplete(Void result) {
-            Intent intent = new Intent(context, LoginActivity.class);
             startActivity(intent);
             finish();
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(intent);
+        finish();
+
     }
 }
 

@@ -1,8 +1,35 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent"  tools:context=".FeedActivity">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <LinearLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/viewA"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="0.6"
+        android:background="#777777"
+        android:orientation="horizontal"
+        android:layout_marginLeft="30dp"/>
+
+    <LinearLayout
+        android:id="@+id/viewB"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_weight="0.4"
+        android:background="#777777"
+        android:orientation="horizontal"/>
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/swipeContainer">
     <ListView
         android:id="@+id/lv_event"
         android:layout_width="match_parent"
@@ -10,13 +37,20 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true" >
     </ListView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-    <Button
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/btn_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Create new Event"
-        android:id="@+id/btn_new_event"
+        android:src="@drawable/ic_action_add"
+        fab:fab_colorNormal="@color/light_brown"
+        fab:fab_colorPressed="@color/brown"
+        fab:fab_colorRipple="#c8c8c8"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="20dp"/>
 
 </RelativeLayout>
