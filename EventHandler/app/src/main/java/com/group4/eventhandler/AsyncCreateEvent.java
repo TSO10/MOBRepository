@@ -10,8 +10,7 @@ import webservice.RestAPI;
 /**
  * Created by Parsa on 09/08/2015.
  */
-public class AsyncCreateEvent extends
-        AsyncTask<Event, Void, Void> {
+public class AsyncCreateEvent extends AsyncTask<Event, Void, Void> {
 
     Context context;
     iAsyncTaskCompleteListener listener;

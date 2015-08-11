@@ -16,7 +16,7 @@
 
     <!-- ActionBar styles -->
     <style name="MyActionBar" parent="@android:style/Widget.Holo.Light.ActionBar.Solid.Inverse">
-        <item name="android:background">@color/light_brown</item>
+        <item name="android:background">@color/ActionBar</item>
     </style>
 
     <style name="cust_dialog" parent="@android:style/Theme.Holo.Dialog">

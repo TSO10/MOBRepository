@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".CreateUserActivity">
+    tools:context=".CreateUserActivity" android:background="@drawable/ic_event1">
 
 
     <LinearLayout
@@ -15,9 +15,9 @@
         android:layout_width="match_parent"
         android:layout_height="470dp"
 
-        android:background="@color/light_brown"
+        android:background="@drawable/color_background"
         android:orientation="vertical"
-        android:weightSum="1">
+        android:weightSum="1" android:gravity="center_vertical" android:layout_marginTop="25dp">
 
         <Button
             android:id="@+id/btn_load_image"
