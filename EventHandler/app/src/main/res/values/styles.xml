@@ -34,7 +34,7 @@
         <item name="android:gravity">center_horizontal</item>
     </style>
 
-    <style name="give_form_field_style">
+    <style name="create_form_field_style">
 
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">40dp</item>

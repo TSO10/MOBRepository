@@ -64,6 +64,8 @@ public class CreateEventActivity extends FragmentActivity {
             @Override
             public void onClick(View arg0) {
                 // TODO Auto-generated method stub
+
+                //Request images from Mediastore and go back to activity after choose an image
                 Intent intent = new Intent(Intent.ACTION_PICK,
                         android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(intent, 0);

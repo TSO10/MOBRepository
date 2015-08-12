@@ -7,16 +7,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.os.Bundle;
-import android.util.AttributeSet;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.melnykov.fab.FloatingActionButton;
 
@@ -27,14 +24,13 @@ public class FeedActivity extends Activity {
 
     ListView listv;
     Context context;
-    ArrayList<Event> eventArrayList;
     static int itemid;
     Intent intent;
     private SwipeRefreshLayout swipeContainer;
     FloatingActionButton fab;
     FeedAdapter adapter;
-    public Activity CustomListView = null;
-    public ArrayList<Event> CustomListViewValuesArr = new ArrayList<Event>();
+    public Activity activity = null;
+    public ArrayList<Event> eventArrayList = new ArrayList<Event>();
     private ImageButton mIbOptions;
     private Dialog mDialog;
     private Button mBtnCancelOptions;
@@ -46,7 +42,7 @@ public class FeedActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-        CustomListView = this;
+        activity = this;
         intent = new Intent(this, CreateEventActivity.class);
         ActionBar actionBar = getActionBar();
         actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -67,14 +63,14 @@ public class FeedActivity extends Activity {
                 android.R.color.holo_purple);
 
 
-        eventArrayList = new ArrayList<Event>();
+
         listv = (ListView) findViewById(R.id.lv_event);
         context = this;
         Resources res = getResources();
 
 
         /**************** Create Custom Adapter *********/
-        adapter = new FeedAdapter(CustomListView, CustomListViewValuesArr, res);
+        adapter = new FeedAdapter(activity, eventArrayList, res);
         listv.setAdapter(adapter);
         itemid = FeedAdapter.itemId;
 
@@ -138,7 +134,7 @@ public class FeedActivity extends Activity {
      */
 
     public void onItemClick(int mPosition) {
-        Event event = (Event) CustomListViewValuesArr.get(mPosition);
+        Event event = (Event) eventArrayList.get(mPosition);
 
         Intent intent = new Intent(getApplicationContext(), EventDetailsActivity.class);
         itemid = event.getId();
@@ -151,13 +147,12 @@ public class FeedActivity extends Activity {
         @Override
         public void onTaskComplete(ArrayList<Event> result) {
 
-            CustomListViewValuesArr.clear();
             eventArrayList.clear();
 
             for (Event event : result) {
-                eventArrayList.add(event);
 
-                CustomListViewValuesArr.add(event);
+
+                eventArrayList.add(event);
             }
 
             adapter.notifyDataSetChanged();

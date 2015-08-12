@@ -21,7 +21,7 @@
 
         <Button
             android:id="@+id/btn_load_image"
-            style="@style/give_form_field_style"
+            style="@style/create_form_field_style"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/form_field"
@@ -30,14 +30,14 @@
 
         <EditText
             android:id="@+id/et_headline"
-            style="@style/give_form_field_style"
+            style="@style/create_form_field_style"
             android:layout_marginBottom="10dp"
             android:hint="headline"
             android:padding="5dp" />
 
         <EditText
             android:id="@+id/et_description"
-            style="@style/give_form_field_style"
+            style="@style/create_form_field_style"
             android:layout_height="50dp"
             android:gravity="top"
             android:hint="description"
@@ -101,7 +101,7 @@
 
         <Button
             android:id="@+id/btn_createEvent"
-            style="@style/give_form_field_style"
+            style="@style/create_form_field_style"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="20dp"
             android:background="@drawable/form_field"

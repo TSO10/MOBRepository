@@ -8,5 +8,4 @@
         android:endColor="@color/ActionBar"
         android:type="linear" />
 
-
 </shape>

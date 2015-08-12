@@ -21,6 +21,7 @@ public class AsyncCreateEvent extends AsyncTask<Event, Void, Void> {
         this.listener = listener;
     }
 
+    //method to create an event
     @Override
     protected Void doInBackground(Event... params) {
 

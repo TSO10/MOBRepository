@@ -91,11 +91,11 @@ public class FeedAdapter extends BaseAdapter {
             holder.tv_headline.setText("No Data");
 
         } else {
-            /***** Get each Model object from Arraylist ********/
+            /***** Get each event object from Arraylist ********/
             event = null;
             event = (Event) arrayList.get(position);
 
-            /************  Set Model values in Holder elements ***********/
+            /************  Set event values in Holder elements ***********/
 
             holder.tv_headline.setText(event.getHeadline());
             holder.tv_desc.setText(event.getDescription());
@@ -132,8 +132,8 @@ public class FeedAdapter extends BaseAdapter {
         public void onClick(View arg0) {
 
 
-            FeedActivity sct = (FeedActivity) activity;
-            sct.onItemClick(mPosition);
+            FeedActivity feedActivity = (FeedActivity) activity;
+            feedActivity.onItemClick(mPosition);
         }
     }
 }
